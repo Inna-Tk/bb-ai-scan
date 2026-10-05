@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -76,6 +76,30 @@ body {
 
 .pane { padding: 18px 20px 24px; }
 .pane[hidden] { display: none !important; }
+
+.langbar {
+  display: flex;
+  gap: 2px;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.lang {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color .12s, background .12s, color .12s;
+}
+
+.lang:hover { border-color: var(--violet-line); }
+.lang.on { border-color: var(--violet); background: var(--violet); color: #fff; }
 
 .brand {
   display: flex;
@@ -518,80 +542,84 @@ img { max-width: 100%; }
   <!-- ===== step 1: offer + contact ===== -->
   <div class="pane" id="s1">
     <div class="product">
+      <div class="langbar">
+        <button class="lang on" data-lang="nl">NL</button>
+        <button class="lang" data-lang="en">EN</button>
+      </div>
       <div class="brand">
         <span class="mark"><svg viewBox="160 203 100 100" aria-hidden="true"><path d="M226.97 249.905C227.229 248.938 226.952 247.905 226.244 247.196L206.185 227.138C204.658 225.611 205.356 223.004 207.442 222.445L217.454 219.762C218.422 219.503 219.455 219.78 220.163 220.488L242.512 242.837C243.22 243.545 243.497 244.578 243.238 245.546L240.625 255.296C240.366 256.264 239.61 257.02 238.642 257.28L228.631 259.962C226.545 260.521 224.637 258.613 225.195 256.527L226.97 249.905Z" fill="#fff"/><path d="M202.546 286.239C201.578 286.498 200.545 286.221 199.837 285.513L192.707 278.383C191.999 277.675 191.722 276.642 191.982 275.674L194.664 265.662C195.223 263.577 197.83 262.878 199.357 264.405L204.196 269.244C204.905 269.953 205.937 270.23 206.905 269.971L234.304 262.636C236.389 262.077 238.297 263.986 237.738 266.071L235.058 276.075C234.798 277.043 234.042 277.799 233.075 278.058L202.546 286.239Z" fill="#fff"/><path d="M199.376 226.058C198.667 225.35 197.634 225.073 196.666 225.332L186.926 227.942C185.958 228.202 185.202 228.958 184.942 229.926L176.762 260.454C176.503 261.422 176.78 262.455 177.488 263.163L184.819 270.495C186.346 272.021 188.953 271.323 189.511 269.237L196.852 241.835C197.111 240.867 197.867 240.111 198.835 239.852L205.448 238.08C207.533 237.521 208.232 234.914 206.705 233.387L199.376 226.058Z" fill="#fff"/></svg></span>
         <span class="wordmark">buildbuild</span>
       </div>
-      <span class="product-name">AI-Readiness Audit</span>
+      <span class="product-name" data-i18n="product">AI-Readiness Audit</span>
     </div>
 
-    <h1>Is your construction company ready for AI?</h1>
-    <p class="lede">A free audit of how your company works today — from estimates and planning to hours, extra work, invoicing and documents.</p>
+    <h1 data-i18n="h1">Is your construction company ready for AI?</h1>
+    <p class="lede" data-i18n="lede1">A free audit of how your company works today — from estimates and planning to hours, extra work, invoicing and documents.</p>
 
     <div class="show">
-      <p class="show-t">We'll show you</p>
+      <p class="show-t" data-i18n="showT">We'll show you</p>
       <ul>
         <li>
           <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#7b5cfa" stroke-width="2.1" stroke-linecap="round"><path d="M9 7H6a5 5 0 0 0 0 10h3"/><path d="M15 7h3a5 5 0 0 1 0 10h-3"/><path d="M9.5 12h1.2M13.3 12h1.2"/></svg></span>
-          Where information gets lost
+          <span data-i18n="b1">Where information gets lost</span>
         </li>
         <li>
           <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#7b5cfa" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17a9 9 0 1 1 16 0"/><path d="M12 17l4.2-5"/></svg></span>
-          How ready your company is for AI
+          <span data-i18n="b2">How ready your company is for AI</span>
         </li>
         <li>
           <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#7b5cfa" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4"/><path d="M6 4h11l-2.2 3.4L17 11H6"/></svg></span>
-          What to fix first
+          <span data-i18n="b3">What to fix first</span>
         </li>
         <li>
           <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#7b5cfa" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19c3.5 0 3.5-6 7-6s3.5-6 7-6"/><circle cx="4" cy="19" r="1.4" fill="#7b5cfa" stroke="none"/><circle cx="18" cy="7" r="1.4" fill="#7b5cfa" stroke="none"/></svg></span>
-          What your next 12 months could look like
+          <span data-i18n="b4">What your next 12 months could look like</span>
         </li>
       </ul>
     </div>
 
     <div class="deliver">
-      You receive a <b>written report</b> with a score and a roadmap.
+      <span data-i18n-html="deliver">You receive a <b>written report</b> with a score and a roadmap.</span>
     </div>
 
     <div class="applied">
       <div class="applied-top">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" fill="#3d4a12"/></svg>
-        <b>Your Digital Construction Day offer is already applied</b>
+        <b data-i18n="applied">Your Digital Construction Day offer is already applied</b>
       </div>
       <div class="applied-price">
         <s>€195</s>
         <b>Free</b>
-        <span>No payment<br>required</span>
+        <span data-i18n-html="nopay">No payment<br>required</span>
       </div>
     </div>
 
-    <h2 class="formtitle">Request your free audit</h2>
+    <h2 class="formtitle" data-i18n="formTitle">Request your free audit</h2>
     <div class="fields">
-      <label class="f"><span>Your name</span><input type="text" id="f-name" autocomplete="name" placeholder="Jan Peeters"></label>
-      <label class="f"><span>Company</span><input type="text" id="f-company" autocomplete="organization" placeholder="Peeters Bouw BV"></label>
-      <label class="f"><span>Mobile phone</span><input type="tel" id="f-phone" autocomplete="tel" placeholder="+32 4.."></label>
-      <label class="f"><span>Email</span><input type="email" id="f-email" autocomplete="email" placeholder="jan@peetersbouw.be"></label>
+      <label class="f"><span data-i18n="fName">Your name</span><input type="text" id="f-name" autocomplete="name" placeholder="Jan Peeters"></label>
+      <label class="f"><span data-i18n="fCompany">Company</span><input type="text" id="f-company" autocomplete="organization" placeholder="Peeters Bouw BV"></label>
+      <label class="f"><span data-i18n="fPhone">Mobile phone</span><input type="tel" id="f-phone" autocomplete="tel" placeholder="+32 4.."></label>
+      <label class="f"><span data-i18n="fEmail">Email</span><input type="email" id="f-email" autocomplete="email" placeholder="jan@peetersbouw.be"></label>
     </div>
 
-    <label class="wa"><input type="checkbox" id="f-wa"> Reach me on WhatsApp</label>
+    <label class="wa"><input type="checkbox" id="f-wa"> <span data-i18n="wa">Reach me on WhatsApp</span></label>
 
     <label class="consent">
       <input type="checkbox" id="f-consent">
-      <span>I agree that buildbuild may contact me about this scan. See the <a href="#">privacy policy</a>.</span>
+      <span data-i18n-html="consent">I agree that buildbuild may contact me about this scan. See the <a href="#">privacy policy</a>.</span>
     </label>
 
-    <button class="cta" id="go1">Get my free audit</button>
-    <p class="hintline" id="hint1">Phone and consent are needed to continue</p>
+    <button class="cta" id="go1" data-i18n="cta1">Get my free audit</button>
+    <p class="hintline" id="hint1" data-i18n="hint">Phone and consent are needed to continue</p>
   </div>
 
   <!-- ===== step 2: two questions ===== -->
   <div class="pane" id="s2" hidden>
-    <h2>Two quick questions</h2>
-    <p class="lede">So the call is about your situation, not a generic pitch.</p>
+    <h2 data-i18n="h2q">Two quick questions</h2>
+    <p class="lede" data-i18n="ledeq">So the call is about your situation, not a generic pitch.</p>
 
     <div class="q">
-      <span class="q-label">How many projects do you run at the same time?</span>
+      <span class="q-label" data-i18n="q1">How many projects do you run at the same time?</span>
       <div class="opts" data-group="projects">
         <div class="opt">1–3</div>
         <div class="opt">4–10</div>
@@ -600,31 +628,31 @@ img { max-width: 100%; }
     </div>
 
     <div class="q">
-      <span class="q-label">What currently takes the most time or causes the most frustration?</span>
-      <span class="q-hint">Select everything that applies</span>
+      <span class="q-label" data-i18n="q2">What currently takes the most time or causes the most frustration?</span>
+      <span class="q-hint" data-i18n="q2hint">Select everything that applies</span>
       <div class="opts-list" data-multi="pain">
-        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span>Hours and time tracking</div>
-        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span>Extra work and approvals</div>
-        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span>Invoicing and payments</div>
-        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span>Documents and compliance</div>
-        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span>Quotes and planning</div>
-        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span>Something else</div>
+        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span><span data-i18n="p1">Hours and time tracking</span></div>
+        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span><span data-i18n="p2">Extra work and approvals</span></div>
+        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span><span data-i18n="p3">Invoicing and payments</span></div>
+        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span><span data-i18n="p4">Documents and compliance</span></div>
+        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span><span data-i18n="p5">Quotes and planning</span></div>
+        <div class="optrow"><span class="box"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.2l3 3L11.5 3.8"/></svg></span><span data-i18n="p6">Something else</span></div>
       </div>
     </div>
 
-    <button class="cta" id="go2">Continue</button>
+    <button class="cta" id="go2" data-i18n="cta2">Continue</button>
   </div>
 
   <!-- ===== step 3: slot ===== -->
   <div class="pane" id="s3" hidden>
-    <h2>Pick a time for a 10-minute call</h2>
-    <p class="lede">We'll confirm whether the scan is useful for your company and explain what happens next.</p>
+    <h2 data-i18n="h2slot">Pick a time for a 10-minute call</h2>
+    <p class="lede" data-i18n="ledeslot">We'll confirm whether the scan is useful for your company and explain what happens next.</p>
 
     <div class="caller">
       <div class="ava">LV</div>
       <div>
         <b>Leen Vermeulen</b>
-        <span>calls you from +32 2 588 41 20</span>
+        <span><span data-i18n="callsFrom">calls you from</span> +32 2 588 41 20</span>
       </div>
     </div>
 
@@ -637,45 +665,183 @@ img { max-width: 100%; }
       <div class="slot"><span>Thu 16 Oct</span><b>15:30</b></div>
     </div>
 
-    <p class="nofit">No suitable time? We'll contact you within one business day.</p>
+    <p class="nofit" data-i18n="nofit">No suitable time? We'll contact you within one business day.</p>
 
-    <button class="cta" id="go3">Book this time</button>
-    <button class="ghost" id="later">I'll choose later</button>
+    <button class="cta" id="go3" data-i18n="cta3">Book this time</button>
+    <button class="ghost" id="later" data-i18n="later">I'll choose later</button>
   </div>
 
   <!-- ===== step 4: confirmation ===== -->
   <div class="done" id="s4" hidden>
     <div class="check">✓</div>
     <h2 id="done-h">You're in</h2>
-    <p class="lede">Your free AI-Readiness Scan is reserved for Digital Construction Day visitors.</p>
+    <p class="lede" data-i18n="ledeDone">Your free AI-Readiness Scan is reserved for Digital Construction Day visitors.</p>
 
     <div class="booked" id="booked-box">
       <span id="booked-when"></span>
     </div>
 
     <div class="reassure">
-      <div>First step: a 10-minute call with Leen</div>
-      <div>No payment and no preparation required</div>
-      <div>Confirmation is on its way to your inbox</div>
+      <div data-i18n="r1">First step: a 10-minute call with Leen</div>
+      <div data-i18n="r2">No payment and no preparation required</div>
+      <div data-i18n="r3">Confirmation is on its way to your inbox</div>
     </div>
 
     <div class="watch">
-      <div class="watch-top">While you wait</div>
+      <div class="watch-top" data-i18n="waitT">While you wait</div>
       <div class="watch-body">
-        <b>See it at a real contractor</b>
-        <p>Our customer on stage at Digital Construction Day: what changed in his company, in his own words.</p>
-        <a class="watch-btn" href="#">Watch the case</a>
+        <b data-i18n="waitH">See it at a real contractor</b>
+        <p data-i18n="waitP">Our customer on stage at Digital Construction Day: what changed in his company, in his own words.</p>
+        <a class="watch-btn" href="#" data-i18n="waitBtn">Watch the case</a>
       </div>
     </div>
 
     <div class="small-links">
-      <a href="#">Reschedule</a>
-      <a href="#">Add to calendar</a>
-      <a href="#">Cancel</a>
+      <a href="#" data-i18n="lRe">Reschedule</a>
+      <a href="#" data-i18n="lCal">Add to calendar</a>
+      <a href="#" data-i18n="lCancel">Cancel</a>
     </div>
   </div>
 
 </div>
+
+
+<script>
+var I18N = {
+  nl: {
+    product: "AI-Readiness Audit",
+    h1: "Is uw bouwbedrijf klaar voor AI?",
+    lede1: "Een gratis doorlichting van hoe uw bedrijf vandaag werkt — van offertes en planning tot uren, meerwerk, facturatie en documenten.",
+    showT: "Wat u te zien krijgt",
+    b1: "Waar informatie verloren gaat",
+    b2: "Hoe klaar uw bedrijf is voor AI",
+    b3: "Wat u eerst moet aanpakken",
+    b4: "Hoe uw komende 12 maanden eruit kunnen zien",
+    deliver: "U krijgt een <b>schriftelijk rapport</b> met een score en een roadmap.",
+    applied: "Uw Digital Construction Day-aanbod is al toegepast",
+    nopay: "Geen betaling<br>nodig",
+    formTitle: "Vraag uw gratis doorlichting aan",
+    fName: "Uw naam", fCompany: "Bedrijf", fPhone: "Gsm-nummer", fEmail: "E-mail",
+    wa: "Contacteer mij via WhatsApp",
+    consent: "Ik ga ermee akkoord dat buildbuild mij contacteert over deze scan. Zie het <a href=\"#\">privacybeleid</a>.",
+    cta1: "Vraag mijn gratis doorlichting aan",
+    hint: "Telefoonnummer en toestemming zijn nodig om verder te gaan",
+    hintPhone: "Vul uw telefoonnummer in zodat we u kunnen bellen",
+    hintConsent: "Vink het vakje hieronder aan",
+    hintBoth: "Vul uw telefoonnummer in en vink het vakje aan",
+    h2q: "Twee korte vragen",
+    ledeq: "Zo gaat het gesprek over uw situatie, niet over een algemeen verhaal.",
+    q1: "Hoeveel werven loopt u tegelijk?",
+    q2: "Wat kost vandaag het meeste tijd of geeft de meeste frustratie?",
+    q2hint: "Duid alles aan wat van toepassing is",
+    p1: "Uren en tijdsregistratie", p2: "Meerwerk en goedkeuringen", p3: "Facturatie en betalingen",
+    p4: "Documenten en compliance", p5: "Offertes en planning", p6: "Iets anders",
+    cta2: "Verder",
+    h2slot: "Kies een moment voor een gesprek van 10 minuten",
+    ledeslot: "We bekijken of de scan nuttig is voor uw bedrijf en leggen uit wat er daarna gebeurt.",
+    callsFrom: "belt u op vanaf",
+    nofit: "Geen geschikt moment? We contacteren u binnen één werkdag.",
+    cta3: "Dit moment vastleggen", later: "Ik kies later",
+    doneH: "In orde", doneHName: "In orde, ",
+    ledeDone: "Uw gratis AI-Readiness Scan is gereserveerd voor bezoekers van Digital Construction Day.",
+    bookedFor: "Uw gesprek staat gepland op",
+    noSlot: "We contacteren u binnen één werkdag om het gesprek in te plannen.",
+    r1: "Eerste stap: een gesprek van 10 minuten met Leen",
+    r2: "Geen betaling en geen voorbereiding nodig",
+    r3: "De bevestiging is onderweg naar uw mailbox",
+    waitT: "Terwijl u wacht", waitH: "Zie het bij een echte aannemer",
+    waitP: "Onze klant op het podium van Digital Construction Day: wat er veranderde in zijn bedrijf, in zijn eigen woorden.",
+    waitBtn: "Bekijk de case",
+    lRe: "Verplaatsen", lCal: "In agenda zetten", lCancel: "Annuleren",
+    phName: "Jan Peeters", phCompany: "Peeters Bouw BV", phPhone: "+32 4..", phEmail: "jan@peetersbouw.be"
+  },
+  en: {
+    product: "AI-Readiness Audit",
+    h1: "Is your construction company ready for AI?",
+    lede1: "A free audit of how your company works today — from estimates and planning to hours, extra work, invoicing and documents.",
+    showT: "We'll show you",
+    b1: "Where information gets lost", b2: "How ready your company is for AI",
+    b3: "What to fix first", b4: "What your next 12 months could look like",
+    deliver: "You receive a <b>written report</b> with a score and a roadmap.",
+    applied: "Your Digital Construction Day offer is already applied",
+    nopay: "No payment<br>required",
+    formTitle: "Request your free audit",
+    fName: "Your name", fCompany: "Company", fPhone: "Mobile phone", fEmail: "Email",
+    wa: "Reach me on WhatsApp",
+    consent: "I agree that buildbuild may contact me about this scan. See the <a href=\"#\">privacy policy</a>.",
+    cta1: "Get my free audit",
+    hint: "Phone and consent are needed to continue",
+    hintPhone: "Enter your phone number so we can call you",
+    hintConsent: "Please tick the consent box",
+    hintBoth: "Enter your phone number and tick the box below",
+    h2q: "Two quick questions",
+    ledeq: "So the call is about your situation, not a generic pitch.",
+    q1: "How many projects do you run at the same time?",
+    q2: "What currently takes the most time or causes the most frustration?",
+    q2hint: "Select everything that applies",
+    p1: "Hours and time tracking", p2: "Extra work and approvals", p3: "Invoicing and payments",
+    p4: "Documents and compliance", p5: "Quotes and planning", p6: "Something else",
+    cta2: "Continue",
+    h2slot: "Pick a time for a 10-minute call",
+    ledeslot: "We'll confirm whether the scan is useful for your company and explain what happens next.",
+    callsFrom: "calls you from",
+    nofit: "No suitable time? We'll contact you within one business day.",
+    cta3: "Book this time", later: "I'll choose later",
+    doneH: "You're in", doneHName: "You're in, ",
+    ledeDone: "Your free AI-Readiness Scan is reserved for Digital Construction Day visitors.",
+    bookedFor: "Your call is booked for",
+    noSlot: "We'll contact you within one business day to arrange the call.",
+    r1: "First step: a 10-minute call with Leen",
+    r2: "No payment and no preparation required",
+    r3: "Confirmation is on its way to your inbox",
+    waitT: "While you wait", waitH: "See it at a real contractor",
+    waitP: "Our customer on stage at Digital Construction Day: what changed in his company, in his own words.",
+    waitBtn: "Watch the case",
+    lRe: "Reschedule", lCal: "Add to calendar", lCancel: "Cancel",
+    phName: "Jan Peeters", phCompany: "Peeters Bouw BV", phPhone: "+32 4..", phEmail: "jan@peetersbouw.be"
+  }
+};
+
+var LANG = 'nl';
+
+function applyLang(code) {
+  var t = I18N[code];
+  if (!t) return;
+  LANG = code;
+  document.documentElement.lang = code;
+
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var v = t[el.getAttribute('data-i18n')];
+    if (v != null) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+    var v = t[el.getAttribute('data-i18n-html')];
+    if (v != null) el.innerHTML = v;
+  });
+
+  var ph = { 'f-name': 'phName', 'f-company': 'phCompany', 'f-phone': 'phPhone', 'f-email': 'phEmail' };
+  Object.keys(ph).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.placeholder = t[ph[id]];
+  });
+
+  document.querySelectorAll('.lang').forEach(function (b) {
+    b.classList.toggle('on', b.getAttribute('data-lang') === code);
+  });
+
+  try { localStorage.setItem('scanLang', code); } catch (e) {}
+}
+
+document.querySelectorAll('.lang').forEach(function (b) {
+  b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); });
+});
+
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem('scanLang'); } catch (e) {}
+  applyLang(saved === 'en' ? 'en' : 'nl');
+})();
+</script>
 
 <script>
 (function () {
@@ -719,9 +885,8 @@ img { max-width: 100%; }
 
     if (noPhone || noConsent) {
       hint.classList.add('warn');
-      hint.textContent = noPhone && noConsent ? 'Enter your phone number and tick the box below'
-        : noPhone ? 'Enter your phone number so we can call you'
-        : 'Please tick the consent box';
+      var t = I18N[LANG];
+      hint.textContent = noPhone && noConsent ? t.hintBoth : noPhone ? t.hintPhone : t.hintConsent;
       return;
     }
     hint.classList.remove('warn');
@@ -731,18 +896,19 @@ img { max-width: 100%; }
   phone.addEventListener('input', function () {
     phone.classList.remove('bad');
     hint.classList.remove('warn');
-    hint.textContent = 'Phone and consent are needed to continue';
+    hint.textContent = I18N[LANG].hint;
   });
   document.getElementById('go2').addEventListener('click', function () { step(2); });
 
   function finish(when) {
     var box = document.getElementById('booked-box');
     var name = (document.getElementById('f-name').value || '').trim();
-    if (name) document.getElementById('done-h').textContent = "You're in, " + name.split(' ')[0];
+    var t = I18N[LANG];
+    if (name) document.getElementById('done-h').textContent = t.doneHName + name.split(' ')[0];
     if (when) {
-      document.getElementById('booked-when').innerHTML = 'Your call is booked for <br>' + when;
+      document.getElementById('booked-when').innerHTML = t.bookedFor + '<br>' + when;
     } else {
-      box.innerHTML = "We'll contact you within one business day to arrange the call.";
+      box.innerHTML = t.noSlot;
     }
     step(3);
   }
