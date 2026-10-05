@@ -589,7 +589,7 @@ img { max-width: 100%; }
       </div>
       <div class="applied-price">
         <s>€195</s>
-        <b>Free</b>
+        <b data-i18n="freeWord">Free</b>
         <span data-i18n-html="nopay">No payment<br>required</span>
       </div>
     </div>
@@ -657,12 +657,12 @@ img { max-width: 100%; }
     </div>
 
     <div class="slots" data-group="slot">
-      <div class="slot"><span>Tue 14 Oct</span><b>09:30</b></div>
-      <div class="slot"><span>Tue 14 Oct</span><b>14:00</b></div>
-      <div class="slot"><span>Wed 15 Oct</span><b>10:00</b></div>
-      <div class="slot"><span>Wed 15 Oct</span><b>16:00</b></div>
-      <div class="slot"><span>Thu 16 Oct</span><b>08:30</b></div>
-      <div class="slot"><span>Thu 16 Oct</span><b>15:30</b></div>
+      <div class="slot"><span>Wed 14 Oct</span><b>09:30</b></div>
+      <div class="slot"><span>Wed 14 Oct</span><b>14:00</b></div>
+      <div class="slot"><span>Thu 15 Oct</span><b>10:00</b></div>
+      <div class="slot"><span>Thu 15 Oct</span><b>16:00</b></div>
+      <div class="slot"><span>Fri 16 Oct</span><b>08:30</b></div>
+      <div class="slot"><span>Fri 16 Oct</span><b>15:30</b></div>
     </div>
 
     <p class="nofit" data-i18n="nofit">No suitable time? We'll contact you within one business day.</p>
@@ -711,48 +711,50 @@ var I18N = {
   nl: {
     product: "AI-Readiness Audit",
     h1: "Is uw bouwbedrijf klaar voor AI?",
-    lede1: "Een gratis doorlichting van hoe uw bedrijf vandaag werkt — van offertes en planning tot uren, meerwerk, facturatie en documenten.",
-    showT: "Wat u te zien krijgt",
+    lede1: "Een gratis doorlichting van de manier waarop uw bedrijf vandaag werkt — van offertes en planning tot urenregistratie, meerwerk, facturatie en documenten.",
+    showT: "Wat u te weten komt",
     b1: "Waar informatie verloren gaat",
     b2: "Hoe klaar uw bedrijf is voor AI",
-    b3: "Wat u eerst moet aanpakken",
-    b4: "Hoe uw komende 12 maanden eruit kunnen zien",
-    deliver: "U krijgt een <b>schriftelijk rapport</b> met een score en een roadmap.",
-    applied: "Uw Digital Construction Day-aanbod is al toegepast",
+    b3: "Wat u het best eerst aanpakt",
+    b4: "Hoe uw bedrijf de komende 12 maanden kan evolueren",
+    deliver: "U ontvangt een <b>schriftelijk rapport</b> met een score en een concreet stappenplan.",
+    applied: "Uw Digital Construction Day-voordeel is al verrekend",
+    freeWord: "Gratis",
     nopay: "Geen betaling<br>nodig",
     formTitle: "Vraag uw gratis doorlichting aan",
     fName: "Uw naam", fCompany: "Bedrijf", fPhone: "Gsm-nummer", fEmail: "E-mail",
-    wa: "Contacteer mij via WhatsApp",
+    wa: "Neem contact met mij op via WhatsApp",
     consent: "Ik ga ermee akkoord dat buildbuild mij contacteert over deze scan. Zie het <a href=\"#\">privacybeleid</a>.",
     cta1: "Vraag mijn gratis doorlichting aan",
-    hint: "Telefoonnummer en toestemming zijn nodig om verder te gaan",
+    hint: "Telefoon, e-mail en toestemming zijn nodig om verder te gaan",
     hintPhone: "Vul uw telefoonnummer in zodat we u kunnen bellen",
     hintConsent: "Vink het vakje hieronder aan",
-    hintBoth: "Vul uw telefoonnummer in en vink het vakje aan",
+    hintBoth: "Vul uw telefoonnummer en e-mailadres in en vink het vakje aan",
+    hintEmail: "Vul een geldig e-mailadres in",
     h2q: "Twee korte vragen",
     ledeq: "Zo gaat het gesprek over uw situatie, niet over een algemeen verhaal.",
-    q1: "Hoeveel werven loopt u tegelijk?",
-    q2: "Wat kost vandaag het meeste tijd of geeft de meeste frustratie?",
+    q1: "Hoeveel werven heeft u tegelijk lopen?",
+    q2: "Wat neemt vandaag de meeste tijd in beslag of geeft de meeste frustratie?",
     q2hint: "Duid alles aan wat van toepassing is",
     p1: "Uren en tijdsregistratie", p2: "Meerwerk en goedkeuringen", p3: "Facturatie en betalingen",
-    p4: "Documenten en compliance", p5: "Offertes en planning", p6: "Iets anders",
+    p4: "Documenten en regelgeving", p5: "Offertes en planning", p6: "Iets anders",
     cta2: "Verder",
     h2slot: "Kies een moment voor een gesprek van 10 minuten",
     ledeslot: "We bekijken of de scan nuttig is voor uw bedrijf en leggen uit wat er daarna gebeurt.",
     callsFrom: "belt u op vanaf",
     nofit: "Geen geschikt moment? We contacteren u binnen één werkdag.",
-    cta3: "Dit moment vastleggen", later: "Ik kies later",
-    doneH: "In orde", doneHName: "In orde, ",
+    cta3: "Dit tijdstip vastleggen", later: "Ik kies later",
+    doneH: "Uw aanvraag is bevestigd", doneHName: "Alles is geregeld, ",
     ledeDone: "Uw gratis AI-Readiness Scan is gereserveerd voor bezoekers van Digital Construction Day.",
     bookedFor: "Uw gesprek staat gepland op",
     noSlot: "We contacteren u binnen één werkdag om het gesprek in te plannen.",
     r1: "Eerste stap: een gesprek van 10 minuten met Leen",
     r2: "Geen betaling en geen voorbereiding nodig",
-    r3: "De bevestiging is onderweg naar uw mailbox",
+    r3: "U ontvangt de bevestiging zo meteen per e-mail",
     waitT: "Terwijl u wacht", waitH: "Zie het bij een echte aannemer",
     waitP: "Onze klant op het podium van Digital Construction Day: wat er veranderde in zijn bedrijf, in zijn eigen woorden.",
-    waitBtn: "Bekijk de case",
-    lRe: "Verplaatsen", lCal: "In agenda zetten", lCancel: "Annuleren",
+    waitBtn: "Bekijk het klantverhaal",
+    lRe: "Afspraak verplaatsen", lCal: "Aan agenda toevoegen", lCancel: "Annuleren",
     phName: "Jan Peeters", phCompany: "Peeters Bouw BV", phPhone: "+32 4..", phEmail: "jan@peetersbouw.be"
   },
   en: {
@@ -764,16 +766,18 @@ var I18N = {
     b3: "What to fix first", b4: "What your next 12 months could look like",
     deliver: "You receive a <b>written report</b> with a score and a roadmap.",
     applied: "Your Digital Construction Day offer is already applied",
+    freeWord: "Free",
     nopay: "No payment<br>required",
     formTitle: "Request your free audit",
     fName: "Your name", fCompany: "Company", fPhone: "Mobile phone", fEmail: "Email",
     wa: "Reach me on WhatsApp",
     consent: "I agree that buildbuild may contact me about this scan. See the <a href=\"#\">privacy policy</a>.",
     cta1: "Get my free audit",
-    hint: "Phone and consent are needed to continue",
+    hint: "Phone, email and consent are needed to continue",
     hintPhone: "Enter your phone number so we can call you",
     hintConsent: "Please tick the consent box",
-    hintBoth: "Enter your phone number and tick the box below",
+    hintBoth: "Fill in your phone, email and tick the box below",
+    hintEmail: "Enter a valid email address",
     h2q: "Two quick questions",
     ledeq: "So the call is about your situation, not a generic pitch.",
     q1: "How many projects do you run at the same time?",
@@ -893,10 +897,12 @@ document.querySelectorAll('.lang').forEach(function (b) {
     step(1);                                                        // lead saved here
   });
 
-  phone.addEventListener('input', function () {
-    phone.classList.remove('bad');
-    hint.classList.remove('warn');
-    hint.textContent = I18N[LANG].hint;
+  ['f-phone', 'f-email'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', function () {
+      this.classList.remove('bad');
+      hint.classList.remove('warn');
+      hint.textContent = I18N[LANG].hint;
+    });
   });
   document.getElementById('go2').addEventListener('click', function () { step(2); });
 
