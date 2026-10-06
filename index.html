@@ -51,9 +51,8 @@ body {
 
 .phone.wide { max-width: 680px; }
 
-#meeting-frame { min-height: 620px; }
 #meeting-frame .meetings-iframe-container { width: 100%; }
-#meeting-frame iframe { width: 100% !important; border: 0; }
+#meeting-frame iframe { width: 100% !important; border: 0; display: block; }
 
 .phone {
   max-width: 400px;
@@ -955,12 +954,12 @@ document.querySelectorAll('.lang').forEach(function (b) {
     });
     document.querySelector('.phone').classList.add('wide');
     document.getElementById('meeting-frame').innerHTML = '<div class="meetings-iframe-container" data-src="https://meetings-eu1.hubspot.com/inna-tkachenko?' + params.toString() + '"></div>';
-    if (!document.querySelector('script[data-meetings-embed]')) {
-      var script = document.createElement('script');
-      script.src = 'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js';
-      script.setAttribute('data-meetings-embed', 'true');
-      document.body.appendChild(script);
-    }
+    var old = document.querySelector('script[data-meetings-embed]');
+    if (old) old.remove();
+    var script = document.createElement('script');
+    script.src = 'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js';
+    script.setAttribute('data-meetings-embed', 'true');
+    document.body.appendChild(script);
     step(2);
   });
 
