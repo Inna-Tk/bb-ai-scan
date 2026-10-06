@@ -52,8 +52,26 @@ body {
 .phone.wide { max-width: 680px; }
 
 #meeting-frame { margin: 0; }
-#meeting-frame .meetings-iframe-container { width: 100%; margin: 0 !important; }
-#meeting-frame iframe { width: 100% !important; margin: 0 !important; border: 0; display: block; }
+
+#meeting-frame .meetings-iframe-container {
+  width: 100%;
+  margin: 0 !important;
+  min-height: 0 !important;
+}
+
+/* высота фиксируется: иначе iframe держит максимум от шага с календарём,
+   и на коротких шагах кнопки уезжают далеко вниз */
+#meeting-frame iframe {
+  width: 100% !important;
+  margin: 0 !important;
+  border: 0;
+  display: block;
+  height: 620px !important;
+}
+
+@media (min-width: 620px) {
+  #meeting-frame iframe { height: 540px !important; }
+}
 
 .phone {
   max-width: 400px;
