@@ -49,6 +49,12 @@ body {
   line-height: 1.5;
 }
 
+.phone.wide { max-width: 680px; }
+
+#meeting-frame { min-height: 620px; }
+#meeting-frame .meetings-iframe-container { width: 100%; }
+#meeting-frame iframe { width: 100% !important; border: 0; }
+
 .phone {
   max-width: 400px;
   margin-inline: auto;
@@ -531,8 +537,6 @@ img { max-width: 100%; }
 </style>
 </head>
 <body>
-<p class="note">Прототип страницы по QR со стенда. Контакт сохраняется на первом шаге — до вопросов и календаря.</p>
-
 <div class="phone">
 
   <div class="bar" id="bar">
@@ -648,27 +652,7 @@ img { max-width: 100%; }
     <h2 data-i18n="h2slot">Pick a time for a 10-minute call</h2>
     <p class="lede" data-i18n="ledeslot">We'll confirm whether the scan is useful for your company and explain what happens next.</p>
 
-    <div class="caller">
-      <div class="ava">LV</div>
-      <div>
-        <b>Leen Vermeulen</b>
-        <span><span data-i18n="callsFrom">calls you from</span> +32 2 588 41 20</span>
-      </div>
-    </div>
-
-    <div class="slots" data-group="slot">
-      <div class="slot"><span>Wed 14 Oct</span><b>09:30</b></div>
-      <div class="slot"><span>Wed 14 Oct</span><b>14:00</b></div>
-      <div class="slot"><span>Thu 15 Oct</span><b>10:00</b></div>
-      <div class="slot"><span>Thu 15 Oct</span><b>16:00</b></div>
-      <div class="slot"><span>Fri 16 Oct</span><b>08:30</b></div>
-      <div class="slot"><span>Fri 16 Oct</span><b>15:30</b></div>
-    </div>
-
-    <p class="nofit" data-i18n="nofit">No suitable time? We'll contact you within one business day.</p>
-
-    <button class="cta" id="go3" data-i18n="cta3">Book this time</button>
-    <button class="ghost" id="later" data-i18n="later">I'll choose later</button>
+    <div id="meeting-frame"></div>
   </div>
 
   <!-- ===== step 4: confirmation ===== -->
@@ -705,7 +689,6 @@ img { max-width: 100%; }
 
 </div>
 
-
 <script>
 var I18N = {
   nl: {
@@ -731,6 +714,7 @@ var I18N = {
     hintConsent: "Vink het vakje hieronder aan",
     hintBoth: "Vul uw telefoonnummer en e-mailadres in en vink het vakje aan",
     hintEmail: "Vul een geldig e-mailadres in",
+    hintPhoneInvalid: "Vul een volledig en geldig telefoonnummer in",
     h2q: "Twee korte vragen",
     ledeq: "Zo gaat het gesprek over uw situatie, niet over een algemeen verhaal.",
     q1: "Hoeveel werven heeft u tegelijk lopen?",
@@ -778,6 +762,7 @@ var I18N = {
     hintConsent: "Please tick the consent box",
     hintBoth: "Fill in your phone, email and tick the box below",
     hintEmail: "Enter a valid email address",
+    hintPhoneInvalid: "Enter a complete, valid phone number",
     h2q: "Two quick questions",
     ledeq: "So the call is about your situation, not a generic pitch.",
     q1: "How many projects do you run at the same time?",
@@ -876,37 +861,111 @@ document.querySelectorAll('.lang').forEach(function (b) {
     });
   });
 
-  // step 1: soft validation — the button always works, it tells you what is missing
+  // step 1: validate and save the contact in HubSpot before continuing
   var go1 = document.getElementById('go1');
   var consent = document.getElementById('f-consent');
+  var name = document.getElementById('f-name');
   var phone = document.getElementById('f-phone');
+  var email = document.getElementById('f-email');
   var hint = document.getElementById('hint1');
 
-  go1.addEventListener('click', function () {
-    var noPhone = phone.value.trim().length < 4;
-    var noConsent = !consent.checked;
-    phone.classList.toggle('bad', noPhone);
+  function validatePhone(value) {
+    var digits = value.replace(/\D/g, '');
+    return digits.length >= 10 && digits.length <= 15;
+  }
 
-    if (noPhone || noConsent) {
+  function getCookie(name) {
+    var prefix = name + '=';
+    var item = document.cookie.split('; ').find(function (part) { return part.indexOf(prefix) === 0; });
+    return item ? decodeURIComponent(item.slice(prefix.length)) : '';
+  }
+
+  go1.addEventListener('click', async function () {
+    var noName = name.value.trim().length < 2;
+    var noPhone = !validatePhone(phone.value);
+    var noEmail = !/^\S+@\S+\.\S+$/.test(email.value.trim());
+    var noConsent = !consent.checked;
+    name.classList.toggle('bad', noName);
+    phone.classList.toggle('bad', noPhone);
+    email.classList.toggle('bad', noEmail);
+
+    if (noName || noPhone || noEmail || noConsent) {
       hint.classList.add('warn');
-      var t = I18N[LANG];
-      hint.textContent = noPhone && noConsent ? t.hintBoth : noPhone ? t.hintPhone : t.hintConsent;
+      if (noPhone && !noName && !noEmail && !noConsent) {
+        hint.textContent = I18N[LANG].hintPhoneInvalid;
+      } else {
+        hint.textContent = LANG === 'nl' ? 'Vul uw naam, telefoonnummer en geldig e-mailadres in en vink het vakje aan' : 'Enter your name, phone number and a valid email, then tick the consent box';
+      }
       return;
     }
+
+    go1.disabled = true;
     hint.classList.remove('warn');
-    step(1);                                                        // lead saved here
+    var parts = name.value.trim().split(/\s+/);
+    var submissionContext = {
+      hutk: getCookie('hubspotutk'),
+      pageUri: window.location.href,
+      pageName: document.title
+    };
+    if (!submissionContext.hutk) delete submissionContext.hutk;
+
+    var payload = {
+      fields: [
+        { name: 'firstname', value: parts.shift() || '' },
+        { name: 'lastname', value: parts.join(' ') },
+        { name: 'phone', value: phone.value.trim() },
+        { name: 'email', value: email.value.trim() },
+        { name: 'company', value: document.getElementById('f-company').value.trim() }
+      ],
+      context: submissionContext
+    };
+
+    try {
+      var response = await fetch('https://api.hsforms.com/submissions/v3/integration/submit/144870303/872be5b9-6ed9-439a-af9e-3f09fb0c1e33', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error('HubSpot submission failed');
+      step(1);
+    } catch (error) {
+      hint.classList.add('warn');
+      hint.textContent = LANG === 'nl' ? 'Er ging iets mis. Probeer het opnieuw.' : 'Something went wrong. Please try again.';
+    } finally {
+      go1.disabled = false;
+    }
   });
 
-  ['f-phone', 'f-email'].forEach(function (id) {
+  ['f-name', 'f-phone', 'f-email'].forEach(function (id) {
     document.getElementById(id).addEventListener('input', function () {
       this.classList.remove('bad');
       hint.classList.remove('warn');
       hint.textContent = I18N[LANG].hint;
     });
   });
-  document.getElementById('go2').addEventListener('click', function () { step(2); });
+  document.getElementById('go2').addEventListener('click', function () {
+    var parts = document.getElementById('f-name').value.trim().split(/\s+/);
+    var params = new URLSearchParams({
+      embed: 'true',
+      firstname: parts.shift() || '',
+      lastname: parts.join(' '),
+      email: document.getElementById('f-email').value.trim(),
+      locale: LANG === 'nl' ? 'nl-nl' : 'en-us',
+      timezone: 'Europe/Brussels'
+    });
+    document.querySelector('.phone').classList.add('wide');
+    document.getElementById('meeting-frame').innerHTML = '<div class="meetings-iframe-container" data-src="https://meetings-eu1.hubspot.com/inna-tkachenko?' + params.toString() + '"></div>';
+    if (!document.querySelector('script[data-meetings-embed]')) {
+      var script = document.createElement('script');
+      script.src = 'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js';
+      script.setAttribute('data-meetings-embed', 'true');
+      document.body.appendChild(script);
+    }
+    step(2);
+  });
 
   function finish(when) {
+    document.querySelector('.phone').classList.remove('wide');
     var box = document.getElementById('booked-box');
     var name = (document.getElementById('f-name').value || '').trim();
     var t = I18N[LANG];
@@ -919,12 +978,6 @@ document.querySelectorAll('.lang').forEach(function (b) {
     step(3);
   }
 
-  document.getElementById('go3').addEventListener('click', function () {
-    var s = document.querySelector('.slot.on');
-    finish(s ? s.querySelector('span').textContent + ' at ' + s.querySelector('b').textContent : null);
-  });
-
-  document.getElementById('later').addEventListener('click', function () { finish(null); });
 })();
 </script>
 
