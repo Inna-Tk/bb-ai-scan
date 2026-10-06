@@ -51,8 +51,9 @@ body {
 
 .phone.wide { max-width: 680px; }
 
-#meeting-frame .meetings-iframe-container { width: 100%; }
-#meeting-frame iframe { width: 100% !important; border: 0; display: block; }
+#meeting-frame { margin: 0; }
+#meeting-frame .meetings-iframe-container { width: 100%; margin: 0 !important; }
+#meeting-frame iframe { width: 100% !important; margin: 0 !important; border: 0; display: block; }
 
 .phone {
   max-width: 400px;
@@ -961,6 +962,26 @@ document.querySelectorAll('.lang').forEach(function (b) {
     script.setAttribute('data-meetings-embed', 'true');
     document.body.appendChild(script);
     step(2);
+  });
+
+  // HubSpot сообщает о состоявшейся брони — показываем свой экран подтверждения
+  window.addEventListener('message', function (e) {
+    if (!e.data || typeof e.data !== 'object') return;
+    if (e.data.meetingBookSucceeded || e.data.meetingsPayload && e.data.meetingsPayload.meetingBookSucceeded) {
+      var p = e.data.meetingsPayload && e.data.meetingsPayload.bookingResponse;
+      var when = null;
+      try {
+        var t = p && p.event && p.event.dateTime;
+        if (t) {
+          var d = new Date(t);
+          when = d.toLocaleDateString(LANG === 'nl' ? 'nl-BE' : 'en-GB',
+            { weekday: 'long', day: 'numeric', month: 'long' })
+            + ', ' + d.toLocaleTimeString(LANG === 'nl' ? 'nl-BE' : 'en-GB',
+            { hour: '2-digit', minute: '2-digit' });
+        }
+      } catch (err) {}
+      finish(when);
+    }
   });
 
   function finish(when) {
